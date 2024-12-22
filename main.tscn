@@ -1,0 +1,91 @@
+[gd_scene load_steps=11 format=3 uid="uid://do76s5y3dyvhy"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_qkdkg"]
+[ext_resource type="Script" path="res://player.gd" id="2_5g3vi"]
+[ext_resource type="Texture2D" uid="uid://cwgcyhoorl1t8" path="res://textures/sprites/ship.png" id="2_5p4dq"]
+[ext_resource type="Script" path="res://space.gd" id="3_nfpue"]
+[ext_resource type="Texture2D" uid="uid://bns35xna8ewpe" path="res://textures/backgrounds/nebula-vert.png" id="5_vuipy"]
+[ext_resource type="Texture2D" uid="uid://dquogsu5s2mv4" path="res://textures/backgrounds/stars.png" id="6_d2eba"]
+[ext_resource type="Script" path="res://camera_2d.gd" id="7_oir37"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r7re8"]
+radius = 230.0
+height = 505.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u8o5a"]
+load_path = "res://.godot/imported/background_3.png-f7542e185cc1178bb32b21ac0ed5929d.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5bn3i"]
+load_path = "res://.godot/imported/background_4.png-01895ca0ef50a1f13ccd5fda50b6e1bd.ctex"
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_qkdkg")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(300, 900)
+script = ExtResource("2_5g3vi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(267, 878)
+scale = Vector2(0.4, 0.4)
+shape = SubResource("CapsuleShape2D_r7re8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(267, 871.738)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_5p4dq")
+
+[node name="Space" type="ParallaxBackground" parent="."]
+script = ExtResource("3_nfpue")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Space"]
+scale = Vector2(2, 2)
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(607, 4320)
+
+[node name="TextureRect" type="TextureRect" parent="Space/ParallaxLayer"]
+offset_right = 538.0
+offset_bottom = 960.0
+texture = ExtResource("5_vuipy")
+stretch_mode = 1
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Space"]
+scale = Vector2(2, 2)
+motion_scale = Vector2(0.25, 0.25)
+motion_mirroring = Vector2(3840, 2160)
+
+[node name="TextureRect" type="TextureRect" parent="Space/ParallaxLayer2"]
+offset_right = 539.0
+offset_bottom = 959.0
+texture = ExtResource("6_d2eba")
+stretch_mode = 1
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="Space"]
+visible = false
+scale = Vector2(2, 2)
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(256, 224)
+
+[node name="TextureRect" type="TextureRect" parent="Space/ParallaxLayer3"]
+visible = false
+offset_right = 540.0
+offset_bottom = 959.0
+texture = SubResource("CompressedTexture2D_u8o5a")
+stretch_mode = 1
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="Space"]
+visible = false
+scale = Vector2(2, 2)
+motion_mirroring = Vector2(256, 224)
+
+[node name="TextureRect" type="TextureRect" parent="Space/ParallaxLayer4"]
+visible = false
+offset_right = 540.0
+offset_bottom = 961.0
+texture = SubResource("CompressedTexture2D_5bn3i")
+stretch_mode = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("7_oir37")
